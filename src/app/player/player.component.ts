@@ -12,13 +12,19 @@ export class PlayerComponent implements OnInit {
   artists;
   album;
   song;
-  paused;
+  paused = true;
   artistCombined;
   nextPlaying;
   nextPlayingSongs;
   playBackTime;
   playBackDuration;
   playBackPercent;
+
+  currentSong = {
+    name: '',
+    artist: '',
+    uri: ''
+  };
 
 
   state = this.spotify.getState$.subscribe(data => {
@@ -31,29 +37,20 @@ export class PlayerComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.socket.connect();
-
     this.socket.onTogglePlayback$().subscribe((data) => {
-      this.updatePlayer('playback', data);
+      this.spotify.togglePlayback(data);
     });
 
-    this.socket.onNext$().subscribe(() => {
-      this.spotify.skipNext();
+    this.socket.onNext$().subscribe((nextSong) => {
+      console.log(nextSong);
+      this.spotify.playTrack(nextSong.uri);
     });
 
-    this.socket.onPrevious$().subscribe(() => {
-      this.spotify.skipPrevious();
+    this.socket.onPrevious$().subscribe((previousSong) => {
+      this.spotify.playTrack(previousSong.uri);
     });
 
     this.getPlaybackTime();
-  }
-
-  updatePlayer(type, value) {
-    switch (type) {
-      case 'playback':
-        console.log(value);
-        this.spotify.togglePlayback(value);
-    }
   }
 
   updateData(data) {
@@ -85,6 +82,16 @@ export class PlayerComponent implements OnInit {
       this.nextPlayingSongs = this.nextPlaying.map(track => track.name);
       this.ref.detectChanges();
     }
+
+    const song = {
+      name: data.track_window.current_track.name,
+      artist: data.track_window.current_track.artists[0].name,
+      uri: data.track_window.current_track.uri
+    };
+
+    if (this.currentSong !== song) {
+      this.currentSong = song;
+    }
   }
 
   togglePlayback() {
@@ -92,11 +99,11 @@ export class PlayerComponent implements OnInit {
   }
 
   onNext() {
-    this.socket.onNext();
+    this.socket.onNext(this.currentSong);
   }
 
   onPrevious() {
-    this.socket.onPrevious();
+    this.socket.onPrevious(this.currentSong);
   }
 
   getPlaybackTime() {
@@ -106,11 +113,12 @@ export class PlayerComponent implements OnInit {
           this.playBackTime = data.progress_ms;
           this.playBackPercent = 100 * this.playBackTime / this.playBackDuration;
           this.ref.detectChanges();
-          if (this.playBackPercent >= 99.5) {
+          if (this.playBackPercent >= 99) {
             this.spotify.pausePlayback();
+             this.socket.onNext(this.currentSong);
           }
         });
       }
-    }, 500);
+    }, 1000);
   }
 }

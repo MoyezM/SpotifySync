@@ -143,8 +143,14 @@ export class SpotifyService {
     if (paused) {
       this.spotifyApi.pause();
     } else if (!paused) {
-      this.spotifyApi.play()
+      this.spotifyApi.play();
     }
+  }
+
+  playTrack(uri) {
+    this.spotifyApi.play({
+      uris: [uri]
+    });
   }
 
 }

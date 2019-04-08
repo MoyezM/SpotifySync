@@ -1,23 +1,49 @@
 <div class="row">
-  <div class="example-container">
+  <div class="container">
     <h2>Songs</h2>
     <form [formGroup]="song" (ngSubmit)="onSubmit()">
-      <mat-form-field>
-          <input matInput type="text" formControlName="songSearch">
-      </mat-form-field>
-      <button mat-button type="submit">Submit</button>
-    </form>
-    <div *ngFor="let song of songResultName">
       <div>
-        {{song}}
-        <mat-divider></mat-divider>
+        <mat-form-field>
+            <input matInput type="text" formControlName="songSearch">
+        </mat-form-field>
+        <button mat-button type="submit">Search</button>
+      </div>
+    </form>
+    <div class="results">
+      <div *ngFor="let song of songResultName">
+        <button  mat-button (click)="onAddQueue(song)">
+          <div>
+            <div class="searchName">
+                {{song.name}} 
+              </div>
+              <mat-divider></mat-divider>
+              <div class="searchArtist">
+                {{song.artist}}
+              </div>
+            </div>
+        </button>
       </div>
     </div>
   </div>
   <ng-content></ng-content>
   
-  <div class="example-container">
+  <div class="container">
     <h2>Queue</h2>
+      <div class="results">
+        <div *ngFor="let song of queue">
+          <button  mat-button (click)="onPopQueue(song)">
+            <div>
+              <div class="searchName">
+                {{song.name}} 
+              </div>
+              <mat-divider></mat-divider>
+              <div class="searchArtist">
+                {{song.artist}}
+              </div>
+            </div>
+          </button>
+        </div>
+      </div>
   </div>
 </div>
 

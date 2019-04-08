@@ -1,4 +1,3 @@
-import { QueueComponent } from './queue/queue.component';
 import { MainComponent } from './main/main.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
