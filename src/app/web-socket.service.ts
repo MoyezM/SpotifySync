@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client';
 import * as Rx from 'rxjs';
-
+import { song } from './models';
 
 @Injectable({
   providedIn: 'root'
@@ -120,23 +120,57 @@ export class WebSocketService {
     return Rx.Subject.create(observer, observable);
   }
 
-  onNext(currentSong) {
+  /**
+   * called in the typescript
+   * when the user wants to go
+   * to the next song
+   * @param {song} currentSong
+   * @memberof WebSocketService
+   */
+  onNext(currentSong: song) {
     this.socket.emit('next', currentSong);
   }
 
-  onPrevious(song) {
+  /**
+   * called in the typescript
+   * when the user wants to go
+   * the previous song
+   * @param {song} song
+   * @memberof WebSocketService
+   */
+  onPrevious(song: song) {
     this.socket.emit('previous', song);
   }
 
-  onTogglePlayback(data) {
-    this.socket.emit('togglePlayback', data);
+  /**
+   * Sends a call to the socket
+   * to pause playback
+   * @param {boolean} playbackState
+   * @memberof WebSocketService
+   */
+  onTogglePlayback(playbackState: boolean) {
+    this.socket.emit('togglePlayback', playbackState);
   }
 
-  onAddQueue(song) {
+  /**
+   * called when the user wants
+   * to add a song to the shared
+   * queue
+   * @param {song} song
+   * @memberof WebSocketService
+   */
+  onAddQueue(song: song) {
     this.socket.emit('addToQueue', song);
   }
 
-  onPopQueue(song) {
+  /**
+   * called when the user wants
+   * to remove a song from the
+   * queue
+   * @param {song} song
+   * @memberof WebSocketService
+   */
+  onPopQueue(song: song) {
     this.socket.emit('removeFromQueue', song);
   }
 

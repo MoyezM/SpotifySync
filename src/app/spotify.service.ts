@@ -29,10 +29,10 @@ export class SpotifyService {
   /**
    *
    *
-   * @param {data} data
+   * @param {any} 
    * @memberof SpotifyService
    */
-  getState(data) {
+  getState(data: any) {
     this.state = data;
     this.stateSubject.next(this.state);
   }
