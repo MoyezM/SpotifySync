@@ -1,6 +1,10 @@
-# SpotifySync
+# SpotifySync - How to use
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.3.
+1. Run the app using ng serve
+
+2. Go to `http://localhost:4200/`
+
+3. Press login to authenticate yourself through Spotify
 
 ## Development server
 
