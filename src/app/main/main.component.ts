@@ -1,4 +1,3 @@
-import { WebSocketService } from './../web-socket.service';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 
 @Component({
@@ -7,5 +6,5 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent {
-  
+
 }

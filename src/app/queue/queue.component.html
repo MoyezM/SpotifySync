@@ -4,7 +4,7 @@
     <form [formGroup]="song" (ngSubmit)="onSubmit()">
       <div>
         <mat-form-field>
-            <input matInput type="text" formControlName="songSearch">
+          <input matInput type="text" formControlName="songSearch">
         </mat-form-field>
         <button mat-button type="submit">Search</button>
       </div>
@@ -14,19 +14,18 @@
         <button  mat-button (click)="onAddQueue(song)">
           <div>
             <div class="searchName">
-                {{song.name}} 
-              </div>
-              <mat-divider></mat-divider>
-              <div class="searchArtist">
-                {{song.artist}}
-              </div>
+              {{song.song}} 
             </div>
+            <mat-divider></mat-divider>
+            <div class="searchArtist">
+              {{song.artist}}
+            </div>
+          </div>
         </button>
       </div>
     </div>
   </div>
   <ng-content></ng-content>
-  
   <div class="container">
     <h2>Queue</h2>
       <div class="results">
@@ -34,7 +33,7 @@
           <button  mat-button (click)="onPopQueue(song)">
             <div>
               <div class="searchName">
-                {{song.name}} 
+                {{song.song}} 
               </div>
               <mat-divider></mat-divider>
               <div class="searchArtist">

@@ -1,55 +1,55 @@
 <div class="container-col">
-    <div>
-      <img class ="album" src={{imageURL}}>
-    </div>
-    <mat-progress-bar class="album" mode="determinate" value={{playBackPercent}}></mat-progress-bar>
-    <div class="next"></div>
-    <div>
-        {{song}}
-        <mat-divider></mat-divider>
-    </div>
-    <div>
-      {{artistCombined}}
-      <mat-divider></mat-divider>
-    </div>
-    <div>
-      {{album}}
-      <mat-divider></mat-divider>
-    </div>
+  <div>
+    <img class ="album" src={{imageURL}}>
   </div>
+  <mat-progress-bar class="album" mode="determinate" value={{playBackPercent}}></mat-progress-bar>
+  <div class="next"></div>
+  <div>
+    {{song}}
+    <mat-divider></mat-divider>
+  </div>
+  <div>
+    {{artistCombined}}
+    <mat-divider></mat-divider>
+  </div>
+  <div>
+    {{album}}
+    <mat-divider></mat-divider>
+  </div>
+</div>
   
-  <div class="container-row">
-    <button mat-icon-button (click)="onPrevious()">
-        <mat-icon class="mat-18">skip_previous</mat-icon>
-    </button>
-    <div [ngSwitch]="paused">
-      <div *ngSwitchCase="true">
-        <button mat-icon-button (click)="togglePlayback()">
-            <mat-icon class="mat-18">play_arrow</mat-icon>
-        </button>
-      </div>
-      <div *ngSwitchCase="false">
-        <button mat-icon-button (click)="togglePlayback()">
-            <mat-icon class="mat-18">pause</mat-icon>
-        </button>
-      </div>
-      <div *ngSwitchDefault>
-        <button mat-icon-button (click)="togglePlayback()">
-            <mat-icon class="mat-18">play_arrow</mat-icon>
-        </button>
-      </div>
+<div class="container-row">
+  <button mat-icon-button (click)="onPrevious()">
+    <mat-icon class="mat-18">skip_previous</mat-icon>
+  </button>
+  <div [ngSwitch]="paused">
+    <div *ngSwitchCase="true">
+      <button mat-icon-button (click)="togglePlayback()">
+        <mat-icon class="mat-18">play_arrow</mat-icon>
+      </button>
     </div>
-    <button mat-icon-button (click)="onNext()">
-        <mat-icon class="mat-18">skip_next</mat-icon>
-    </button>
+    <div *ngSwitchCase="false">
+      <button mat-icon-button (click)="togglePlayback()">
+        <mat-icon class="mat-18">pause</mat-icon>
+      </button>
+    </div>
+    <div *ngSwitchDefault>
+      <button mat-icon-button (click)="togglePlayback()">
+        <mat-icon class="mat-18">play_arrow</mat-icon>
+      </button>
+    </div>
   </div>
-  <div class="container-col">
+  <button mat-icon-button (click)="onNext()">
+    <mat-icon class="mat-18">skip_next</mat-icon>
+  </button>
+</div>
+<div class="container-col">
+  <div class="next"></div>
+  <div *ngFor="let song of nextPlayingSongs">
+    {{song}}
+    <mat-divider></mat-divider>
     <div class="next"></div>
-    <div *ngFor="let song of nextPlayingSongs">
-      {{song}}
-      <mat-divider></mat-divider>
-      <div class="next"></div>
-    </div>
   </div>
+</div>
   
   
